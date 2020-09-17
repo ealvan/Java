@@ -45,5 +45,6 @@ I want to finish the whole book, I hope I can do it, because I am apassionate ab
   17 Release Your Code: packaging and deployment 
 
   18 Distributed Computing: RMI with a dash of servlets, EJB, and Jini
-A Appendix A: Final code kitchen
-B Appendix B: Top Ten Things that didn’t make it into the rest of the book
+- A Appendix A: Final code kitchen
+
+- B Appendix B: Top Ten Things that didn’t make it into the rest of the book
