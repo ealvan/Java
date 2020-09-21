@@ -3,11 +3,16 @@ package Algoritm_Married;
 public class selectionSort {
 
 	public static void main(String[] args) {
-		int[] array = {1,4,3,5,2,61,4,2,52};
+		int[] array = {};
 		selectionSort(array);
 	}
  	
+//el emjor caso es cuando el array tiene todos los elemntos iguales, pues nuca entraria en los if
+//seria igual a n
 public static void selectionSort(int[] arr) {
+	if (arr.length == 0) {
+		System.out.print("array is empty");
+		return;}
 	int i = 0;
 	//el bucle se hace hasta el indice n-1, pues des el n-1 hasta n, bucaremos el 
 	//menor valor y retornaremos el indice
@@ -24,9 +29,11 @@ public static void selectionSort(int[] arr) {
 		}
 		//todos los elementos de i hasta n-1 son mayores o iguales al elementos arr[indexM]
 		//invariant loop is { k in  i...n-1 | arr[k] >= arr[indexM] }
-		int aux = arr[minIdx];
-		arr[minIdx] = arr[i];
-		arr[i] = aux;
+		if(minIdx != i) {
+			int aux = arr[minIdx];
+			arr[minIdx] = arr[i];
+			arr[i] = aux;
+		}
 		i++;
 	}
 	for (int j = 0; j< arr.length; j++) {
