@@ -15,11 +15,17 @@ public static void selectionSort(int[] arr) {
 	//osea el menor valor si os i es el de indice n
 	while(i < arr.length-1) {
 		
-		int indexM = giveMinor(arr,i);
-		//todos los elementos de i hasta n-1 son mayores o iguales al elemnto arr[indexM]
+		//int indexM = giveMinor(arr,i);
+		int minIdx = i;
+		for(int j = i+1; j < arr.length; j++) {
+			if(arr[minIdx] > arr[j]) {
+				minIdx = j;
+			}
+		}
+		//todos los elementos de i hasta n-1 son mayores o iguales al elementos arr[indexM]
 		//invariant loop is { k in  i...n-1 | arr[k] >= arr[indexM] }
-		int aux = arr[indexM];
-		arr[indexM] = arr[i];
+		int aux = arr[minIdx];
+		arr[minIdx] = arr[i];
 		arr[i] = aux;
 		i++;
 	}
