@@ -8,7 +8,7 @@ public class selectionSort {
 	}
  	
 //el emjor caso es cuando el array tiene todos los elemntos iguales, pues nuca entraria en los if
-//seria igual a n
+//seria igual a n al cuadrado
 public static void selectionSort(int[] arr) {
 	if (arr.length == 0) {
 		System.out.print("array is empty");
