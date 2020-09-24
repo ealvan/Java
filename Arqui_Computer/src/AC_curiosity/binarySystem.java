@@ -8,8 +8,8 @@ public class binarySystem {
 	
 		//int b = binary_to_decimal("1011011001");
 		//System.out.println(b);
-		String binary = decimal_to_binary(235);
-		System.out.println(binary);
+		//String binary = decimal_to_binary(235);
+		//System.out.println(binary);
 		//int bits = range_number_bits(1000000);
 		//System.out.print(bits);
 		//String hexadecimal = decimal_to_hexadecimal(214);
