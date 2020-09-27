@@ -1,25 +1,51 @@
 package Algoritm_Married;
 
+ 
 public class MergeSort {
 
 	public static void main(String[] args) {
 		
-		
+		//long start = System.currentTimeMillis();
 		//int[] list = {1,2,0,0,0};
-		int[] min = {-1,4,3};
+		//int[] min = {-1,4,3};
 		//int[] list1 = {1};
 		//list1 = rest(list1);
 		//print_(list1);
 		//System.out.print(list1.length);
 		//list = append(min,list);
-		min = mergeSort(min);
-		print_(min);
+		//min = mergeSort(min);
+		//long fin = System.currentTimeMillis() - start;
+		//System.out.println(fin);
+		//print_(min);
 		
+		int[] list;
+		long start, fin ;
+		for(int i = 1; i < 10000; i++) {
+			list  = generate(i);
+			list = mergeSort(list);
+			reverse(list);
+			start = System.nanoTime();
+			list = mergeSort(list);
+			fin = System.nanoTime() - start;
+			System.out.println(fin);
+		}
 	}
+public static void reverse(int[] list) {
+	int [] list_ = new int[list.length];
+	int i = 0;
+	for(Integer key: list) {
+		list[i]= key;
+		i++;
+	}
+	list = list_;
+	
+}
 public static void print_(int[] list) {
+	String str = "";
 	for(int i = 0; i < list.length; i++) {
-		System.out.print(list[i]);
+		str += list[i]+" ";
 	}
+	System.out.println(str);
 }
 public static int[] mergeSort(int arr[]) {
 	if(arr.length <= 1) {
@@ -95,7 +121,13 @@ public static int[] append(int list_min[], int result[] ) {
 	}
 	
 	return result;
-	
+}
+public static int[] generate(int num) {
+	int[] list = new int[num];
+	for(int i = 0; i < list.length; i++) {
+		list[i] = (int)(Math.random()*num + 1);	
+	}
+	return list;
 }
 
 
