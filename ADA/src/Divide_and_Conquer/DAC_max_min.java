@@ -5,15 +5,39 @@ public class DAC_max_min {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] list = {1,2,3,4,5,6,7,8,9,12,32,43,54,65};
-		boolean max = binary_search(list,0,list.length-1,77);
+		boolean max = binary_search_random(list,0,list.length-1,32);
 		System.out.println(max);
 	}
+
+	
+//list,first_element,last_element,key_search
+public static boolean binary_search_random(int list[], int b, int f, int key) {
+	int middle;
+	if(b > f) {
+		return false;
+	}
+	middle = (int) Math.random()*(f-b+1)+b;
+	//middle = (b + (int)(Math.random() % (f-b+1)));
+	if(list[middle] == key) {
+		return true;
+	}else {
+		if(list[middle] > key) {
+			return binary_search(list,b,middle-1,key);
+		}else {
+			return binary_search(list,middle+1,f,key);
+		}
+	}
+	
+	
+	
+}
+	
 public static boolean binary_search(int[] list, int b, int f,int key) {
 		int middle;
 		if(b > f) {
 			return false;
 		}
-		middle = (b+f)/2;
+		middle = (f+b)/2;
 		if(list[middle] == key) {
 			return true;
 		}else {
