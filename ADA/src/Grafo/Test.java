@@ -8,7 +8,7 @@ public class Test {
 	public static void main(String[] args) {
 		Grafo grf = new Grafo(100);
 		try{
-			String fileName = "C:/Users/Toshiba/Desktop/codigo_user.txt";
+			String fileName = "codigo_user.txt";
 			File file = new File(fileName);
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
@@ -31,7 +31,7 @@ public class Test {
 		} 
 		try{
 			
-			String fileName = "C:/Users/Toshiba/Desktop/relacion.txt";
+			String fileName = "relacion.txt";
 			File file = new File(fileName);
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
