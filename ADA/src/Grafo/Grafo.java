@@ -104,6 +104,22 @@ public class Grafo {
 			ini++;
 		}
 	}
+	public void DFSUtil(int id, boolean visited[]) {
+		visited[id - 1] = true;
+		System.out.println("Id: "+id+" "+"User: "+directorio[id - 1].cabeza);
+		
+		Nodo nodo = directorio[id - 1].cabeza;
+		while(nodo != null) {
+			if(!visited[nodo.id-1]) {
+				DFSUtil(nodo.id,visited);
+			}
+			nodo = nodo.siguiente;
+		}
+	}
+	public void DFS(int size) {
+		boolean visited[] = new boolean[size];
+		DFSUtil(1,visited);
+	}
 	
  
 	//este metodo nos regresa implicitamente el numero de veces que tenemos que repetir el 
@@ -137,30 +153,87 @@ public class Grafo {
 	 
 	
 	public static void main(String[] args) {
-		Grafo gr = new Grafo(6);
-		gr.insertarUsuario("pablo", 1);
-		gr.insertarUsuario("carlos", 2);
-		gr.insertarUsuario("pepe", 3);
-		gr.insertarUsuario("juan", 4);
-		gr.insertarUsuario("luis", 5);
-		gr.insertarUsuario("popis", 6);
-		
+		//Grafo gr = new Grafo(6);
+		//gr.insertarUsuario("pablo", 1);
+		//gr.insertarUsuario("carlos", 2);
+		//gr.insertarUsuario("pepe", 3);
+		//gr.insertarUsuario("juan", 4);
+		//gr.insertarUsuario("luis", 5);
+		//gr.insertarUsuario("popis", 6);
+
+		//gr.relacion(1, 2);
+		//gr.relacion(1, 3);
+		//gr.relacion(2, 4);
+		//gr.relacion(2, 5);
+		//gr.relacion(2, 1);
+		//gr.relacion(3, 1);
+		//gr.relacion(3, 5);
+		//gr.relacion(4, 2);
+		//gr.relacion(4, 5);
+		//gr.relacion(4, 6);
+		//gr.relacion(5, 2);
+		//gr.relacion(5, 3);
+		//gr.relacion(5, 4);
+		//gr.relacion(5, 6);
+		//gr.relacion(6, 4);
+		//gr.relacion(6, 5);
+		//gr.printLevel(1, 3);
+		Grafo gr = new Grafo(14);
+		gr.insertarUsuario("1", 1 );
+		gr.insertarUsuario("2", 2 );
+		gr.insertarUsuario("3", 3 );
+		gr.insertarUsuario("4", 4 );
+		gr.insertarUsuario("5", 5 );
+		gr.insertarUsuario("6", 6 );
+		gr.insertarUsuario("7", 7 );
+		gr.insertarUsuario("8", 8 );
+		gr.insertarUsuario("9", 9 );
+		gr.insertarUsuario("10", 10 );
+		gr.insertarUsuario("13", 11 );
+		gr.insertarUsuario("15",  12);
+		gr.insertarUsuario("21",  13);
+		gr.insertarUsuario("23",  14);
+		//****************************
 		gr.relacion(1, 2);
 		gr.relacion(1, 3);
-		gr.relacion(2, 4);
-		gr.relacion(2, 5);
+		gr.relacion(1, 4);
+		gr.relacion(1, 5);
+
 		gr.relacion(2, 1);
+		gr.relacion(2, 10);
+		gr.relacion(2, 11);
+
 		gr.relacion(3, 1);
-		gr.relacion(3, 5);
-		gr.relacion(4, 2);
-		gr.relacion(4, 5);
-		gr.relacion(4, 6);
-		gr.relacion(5, 2);
-		gr.relacion(5, 3);
-		gr.relacion(5, 4);
-		gr.relacion(5, 6);
-		gr.relacion(6, 4);
-		gr.relacion(6, 5);
-		gr.printLevel(1, 3);
+		gr.relacion(3, 13);
+
+		gr.relacion(4, 1);
+		gr.relacion(4, 12);
+
+		gr.relacion(5, 1);
+		gr.relacion(5, 14);
+		gr.relacion(5, 8);
+
+		gr.relacion(10, 2);
+
+		gr.relacion(11, 2);
+
+		gr.relacion(13, 3);
+		gr.relacion(13, 6);
+		gr.relacion(13, 7);
+		gr.relacion(13, 9);
+
+		gr.relacion(12, 4);
+
+		gr.relacion(14, 5);
+
+		gr.relacion(8, 5);
+
+		gr.relacion(6, 13);
+
+		gr.relacion(7, 13);
+
+		gr.relacion(9, 13);
+		
+		gr.DFS(gr.vertices);
 	}
 }
