@@ -1,7 +1,5 @@
 package Grafo;
 
-
-
 public class Lista {
 
 	Nodo cabeza;
@@ -50,7 +48,7 @@ public class Lista {
 		if( cabeza == null){
 			return null;
 		}else{
-				//buscamos el anterior a N osea N-1
+			//buscamos el anterior a N osea N-1
 			Nodo puntero = cabeza;
 			//iteramos hasta que una de estas dos condiciones no se cumpal
 			while(puntero != null && puntero.id != id){ 
@@ -81,7 +79,7 @@ public class Lista {
 	}
 
 	public static void main(String[] args) {
-		//probando si funcion correctamente
+		//probando si funciona correctamente
 		Lista l = new Lista(null);
 		l.insertar("carlos",1);
 		l.insertar("jose",2);

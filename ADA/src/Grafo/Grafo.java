@@ -16,9 +16,13 @@ public class Grafo {
 		directorio = new Lista[this.vertices];
 		//incializamos la lista de listas enlazaadas
 	}
-	//este metodo instancia a un usuario, con una lista del directorio
-	public void insertarUsuario(String user,int id){
-		Nodo temp = new Nodo(user,id);//necesitamos el id, y el string
+	//este metodo instancia a un nodo, con una lista del directorio
+	//name : este parametro es el nombre del nodo
+	//(tambien se puede entender como el contenido)
+	//id : este es el identificador del nodo, para crear
+	//su propia lista enlazada
+	public void insertarNodo(String name,int id){
+		Nodo temp = new Nodo(name,id);
 		//como siempre se empiueza de cero, hacemos que sea uno menos
 		//asi si el id = 1, entonces posicion = 0
 		//esto esta acomodado, pues como el data set es de 1 a 100
@@ -31,209 +35,84 @@ public class Grafo {
 		Nodo otro = directorio[xvertice_id - 1].cabeza;
 		//ahora un nuevo,nodo, esto lo hago pues si guardo la
 		//referencia, cuando insertemos mas en una lista hara que en la otra
-		//tambien se haga, pues la referencia solo es un alias(me tomo tiempo entenderlo :()
-		//y cuando hagas una insercion en una lista se ara tambien en la otra
+		//tambien se haga, pues la referencia solo es un alias
+		//y cuando hagas una insercion en una lista se hara tambien en la otra
 		Nodo m = new Nodo(otro);//por eso esto
 		directorio[vertice_id - 1].insertar(m);//insertamos el nodo
 	}
-	//este es el metodo printlevel
-	//lo que hace es imprimir por niveles, de acuerdo a un id de usuario
-	//si es level = 1, imprime los amigos y el usuario
-	//si es level = 2, entonces imprime los amigos + amigos de amigos + el usuario
-	//si es tres, se hara assta los amigos de los amigos de amigos
-	public void printLevel(int id, int level){
-		//opbteniendo las repeticiones que se deben hacer
-		int repeticiones = level_off(id,level);
-		//ahora solo lo ponemos en este metodo 
-		//que imprime dea acuerdo a niveles
-		traversal(id, repeticiones);
+	
+	public void amplitud() {
+		System.out.println("****Amplitud****");
+		this.BFS(1);
 	}
-	//este metodo nos da el nuemro de repeticiones
-	//de cuantas veces es necesario imprimir 
-	//hasta que lleguemos a cierto nivel
-	private int level_off(int id,int level){
-		//este size, nos dara el nuemro de repeticiones
-		int size = 0;
-		//aqui estara una lista de booleans
-		//por defecto el false, cuando se crea
-		boolean[] visitado = new boolean[vertices];
-		//este metodo cambia las lista visitado a true
-		//de acuerdo al level
-		Nlevel(id,level,0,visitado);
-		//como es un objeto, lo unico que hacemos es ver que 
-		//cambios hubo en los true
-		for(int i = 0; i < visitado.length; i++){
-			if(visitado[i] == true){
-				size+=1;
-			}
-		}
-		return size;
-	}
-	//el traversal hace la impresion de acuerdo a un nivel
-	//si es level = 1, imprime los amigos directos
-	//el numero de repeticiones se define de acuerdo a un nivel
-	private void traversal(int id,int p){
+	//el BFS hace la impresion del grafo,conforme 
+	//al orden de la cola
+	private void BFS(int id){
 		//hacemos una lista de booleans, de acuerdo al numero de vertices
 		boolean[] visitado = new boolean[vertices];
+		//creamos la cola
 		Cola cola = new Cola();
-		int ini = 0;
 		//marcamos como visitado esa direccion
 		visitado[id-1] = true;
-		//ontenemos el nodo cabeza de esa direccion
+		//obtenemos el nodo cabeza de esa direccion
 		Nodo nodo_s = directorio[id-1].cabeza;
-		cola.encolar(nodo_s);//y lo encolamos en una pila
-		
-		while(cola.longitud != 0 && ini < p){
-			Nodo m = cola.eliminar();//la eliminamos
-			System.out.print(m.id+" "+m+"\n");//la imprimimos
+		cola.encolar(nodo_s);//y lo encolamos
+		//como tiene un elemento, significa que entrara en el bucle
+		while(cola.longitud != 0 ){
+			Nodo m = cola.eliminar();//eliminamos el nodo
+			System.out.println("Id: "+m.id+" "+"Nombre: "+m);//lo imprimimos
 			//e iteramos sobre sus hijos
 			Nodo puntero = directorio[m.id - 1].cabeza;
 			while(puntero != null){	
+				//si no ha sido visitado uno de sus hijos
 				if(!visitado[puntero.id - 1]){
-					//si no ha sido visitado uno de sus hijos
 					//entonces los visitamos
 					visitado[puntero.id - 1] = true;
 					//y los encolamos en la cola
 					cola.encolar(puntero);
 				}
 				//iteramos al siguiente hijo
-				puntero = puntero.siguiente;
-					  
+				puntero = puntero.siguiente;	  
 			}
-			//imcrementamos esto
-			ini++;
+			
 		}
 	}
-	public void DFSUtil(int id, boolean visited[]) {
-		visited[id - 1] = true;
-		System.out.println("Id: "+id+" "+"User: "+directorio[id - 1].cabeza);
-		
+	//este metodo, es el metodo de profundidad, el cual
+	//va recursivamente llamando el primero hijo del nodo anterior.
+	//hasta que llegue un momento en que todos los nodos esten visitados
+	//significando que ql array visitados, esta completo de trues
+	//el array de visitados es un objeto, el cual solo recibe referencias y vambia
+	//mientras es llamado el metodo recursivamente.
+	private void DFSUtil(int id, boolean visitados[]) {
+		//primero lo marcamos como true
+		visitados[id - 1] = true;
+		//lo imprimimos
+		System.out.println("Id: "+id+" "+"Nombre: "+directorio[id - 1].cabeza);
+		//y ahora vamos a por la lista enlazada, que contiene
+		//a los nodos relacionados directos con este nodo.
 		Nodo nodo = directorio[id - 1].cabeza;
+		//recorremos la lista enlazada
 		while(nodo != null) {
-			if(!visited[nodo.id-1]) {
-				DFSUtil(nodo.id,visited);
+			//si un nodo, de la lista
+			//no esta visitado
+			if(!visitados[nodo.id-1]) {
+				//vamos a ir a ese nodo
+				DFSUtil(nodo.id,visitados);
 			}
+			//si el nodo actual ya esta visitado
+			//entonces seguimos con el siguiente
 			nodo = nodo.siguiente;
 		}
 	}
-	public void DFS(int size) {
-		boolean visited[] = new boolean[size];
-		DFSUtil(1,visited);
+	//este metodo, es un metodo envoltorio 
+	public void profundidad(int longitud) {
+		//creamos el array, el cual esta llena de false's
+		boolean visitado[] = new boolean[longitud];
+		//empezamos por el nodo uno, pero se puede 
+		//por cualquier nodo en realidad
+		System.out.println("***Profundidad***");
+		DFSUtil(1,visitado);
 	}
-	
- 
-	//este metodo nos regresa implicitamente el numero de veces que tenemos que repetir el 
-	//para que sea considerado
-	//el id, nos dice desde que nos se inicia
-	//el level, nos dice hasta que nivel debemos llegar
-	//el actual, nos dice, en que llamada actual estamos 
-	private void Nlevel(int id, int level, int actual, boolean[] visitado){
-		//primero maracamos como visitado, el nodo inicial
-		visitado[id -1 ] = true;
-		//este es nuestro caso base
-		if(actual == level){
-			return;
-		}else{
-			actual++;
-		}
-		//entonces iteramos en los nodos de la lista
-		//identificada con el id
-		Nodo puntero = directorio[id-1].cabeza;
-		while(puntero != null){
-			
-			Nodo temp = puntero;
-			if(!visitado[temp.id - 1]){
-				//si no ha sido vistado, lo vistamos a la siguiente llamada
-					Nlevel(temp.id, level,actual,visitado);
-			}
-			//seguimos con el siguiente
-			puntero = puntero.siguiente;
-		}
-	}
-	 
-	
 	public static void main(String[] args) {
-		//Grafo gr = new Grafo(6);
-		//gr.insertarUsuario("pablo", 1);
-		//gr.insertarUsuario("carlos", 2);
-		//gr.insertarUsuario("pepe", 3);
-		//gr.insertarUsuario("juan", 4);
-		//gr.insertarUsuario("luis", 5);
-		//gr.insertarUsuario("popis", 6);
-
-		//gr.relacion(1, 2);
-		//gr.relacion(1, 3);
-		//gr.relacion(2, 4);
-		//gr.relacion(2, 5);
-		//gr.relacion(2, 1);
-		//gr.relacion(3, 1);
-		//gr.relacion(3, 5);
-		//gr.relacion(4, 2);
-		//gr.relacion(4, 5);
-		//gr.relacion(4, 6);
-		//gr.relacion(5, 2);
-		//gr.relacion(5, 3);
-		//gr.relacion(5, 4);
-		//gr.relacion(5, 6);
-		//gr.relacion(6, 4);
-		//gr.relacion(6, 5);
-		//gr.printLevel(1, 3);
-		Grafo gr = new Grafo(14);
-		gr.insertarUsuario("1", 1 );
-		gr.insertarUsuario("2", 2 );
-		gr.insertarUsuario("3", 3 );
-		gr.insertarUsuario("4", 4 );
-		gr.insertarUsuario("5", 5 );
-		gr.insertarUsuario("6", 6 );
-		gr.insertarUsuario("7", 7 );
-		gr.insertarUsuario("8", 8 );
-		gr.insertarUsuario("9", 9 );
-		gr.insertarUsuario("10", 10 );
-		gr.insertarUsuario("13", 11 );
-		gr.insertarUsuario("15",  12);
-		gr.insertarUsuario("21",  13);
-		gr.insertarUsuario("23",  14);
-		//****************************
-		gr.relacion(1, 2);
-		gr.relacion(1, 3);
-		gr.relacion(1, 4);
-		gr.relacion(1, 5);
-
-		gr.relacion(2, 1);
-		gr.relacion(2, 10);
-		gr.relacion(2, 11);
-
-		gr.relacion(3, 1);
-		gr.relacion(3, 13);
-
-		gr.relacion(4, 1);
-		gr.relacion(4, 12);
-
-		gr.relacion(5, 1);
-		gr.relacion(5, 14);
-		gr.relacion(5, 8);
-
-		gr.relacion(10, 2);
-
-		gr.relacion(11, 2);
-
-		gr.relacion(13, 3);
-		gr.relacion(13, 6);
-		gr.relacion(13, 7);
-		gr.relacion(13, 9);
-
-		gr.relacion(12, 4);
-
-		gr.relacion(14, 5);
-
-		gr.relacion(8, 5);
-
-		gr.relacion(6, 13);
-
-		gr.relacion(7, 13);
-
-		gr.relacion(9, 13);
-		
-		gr.DFS(gr.vertices);
 	}
 }

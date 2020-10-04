@@ -1,72 +1,68 @@
 package Grafo;
-import java.io.File; 
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.util.Iterator;
 public class Test {
 
 	public static void main(String[] args) {
-		Grafo grf = new Grafo(100);
-		try{
-			String fileName = "codigo_user.txt";
-			File file = new File(fileName);
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
-			String line;
-			int i = 1;
-			while((line = br.readLine()) != null){
-			    if(i < 10){
-			    	line = line.substring(2,line.length());
-			    }else if(i < 100){
-			    	line = line.substring(3,line.length());
-			    }else{
-			    	line = line.substring(4,line.length());
-			    }
-			    grf.insertarUsuario(line, i);
-			    i++;
-			}
-			fr.close();
-		}catch(Exception e){
-			System.out.print("no encontro el archivo1");
-		} 
-		try{
-			
-			String fileName = "relacion.txt";
-			File file = new File(fileName);
-			FileReader fr = new FileReader(file);
-			BufferedReader br = new BufferedReader(fr);
-			String line;
-			String c1 = "";
-			String c2 = "";
+		//son 14 vertices en el grafo
+		Grafo gr = new Grafo(14);
 		
-			int c1_i =0;
-			int c2_i =0;
-			while((line = br.readLine()) != null){
-				c1 = line.substring(0,line.indexOf('$'));
-				c1_i = Integer.valueOf(c1);
-				c2 = line.substring(line.indexOf('$')+1,line.length()); 
-				c2_i = Integer.valueOf(c2);
-			   grf.relacion(c1_i, c2_i);
-			   grf.relacion(c2_i, c1_i);
-			    
-			}
-			fr.close();
-		}catch(Exception e){
-			System.out.print("no encontro el archivo2");
-		}
-		System.out.println("****PRIMER NIVEL*****");
-		grf.printLevel(100, 1);
-		System.out.println("****SEGUNDO NIVEL*****");
-		grf.printLevel(100,2 );
-		System.out.println("****TERCER NIVEL*****");
-		grf.printLevel(100, 3);
-		System.out.println("****CUARTO NIVEL*****");
-		grf.printLevel(100, 4);
-		System.out.println("****QUINTO NIVEL*****");
-		grf.printLevel(100, 5);
-		System.out.println("****SEXTO NIVEL*****");
-		grf.printLevel(100, 6);
-		
-	}
+		//insetando nodos
+		gr.insertarNodo("1", 1 );
+		gr.insertarNodo("2", 2 );
+		gr.insertarNodo("3", 3 );
+		gr.insertarNodo("4", 4 );
+		gr.insertarNodo("5", 5 );
+		gr.insertarNodo("6", 6 );
+		gr.insertarNodo("7", 7 );
+		gr.insertarNodo("8", 8 );
+		gr.insertarNodo("9", 9 );
+		gr.insertarNodo("10", 10 );
+		gr.insertarNodo("13", 11 );
+		gr.insertarNodo("15",  12);
+		gr.insertarNodo("21",  13);
+		gr.insertarNodo("23",  14);
+		//****************************
+		//agregando relaciones a los nodos
+		gr.relacion(1, 2);
+		gr.relacion(1, 3);
+		gr.relacion(1, 4);
+		gr.relacion(1, 5);
 
+		gr.relacion(2, 1);
+		gr.relacion(2, 10);
+		gr.relacion(2, 11);
+
+		gr.relacion(3, 1);
+		gr.relacion(3, 13);
+
+		gr.relacion(4, 1);
+		gr.relacion(4, 12);
+
+		gr.relacion(5, 1);
+		gr.relacion(5, 14);
+		gr.relacion(5, 8);
+
+		gr.relacion(10, 2);
+
+		gr.relacion(11, 2);
+
+		gr.relacion(13, 3);
+		gr.relacion(13, 6);
+		gr.relacion(13, 7);
+		gr.relacion(13, 9);
+
+		gr.relacion(12, 4);
+
+		gr.relacion(14, 5);
+
+		gr.relacion(8, 5);
+
+		gr.relacion(6, 13);
+
+		gr.relacion(7, 13);
+
+		gr.relacion(9, 13);
+		
+		gr.profundidad(gr.vertices);
+		gr.amplitud();
+	}
 }

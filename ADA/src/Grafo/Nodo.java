@@ -1,20 +1,23 @@
 package Grafo;
 
 public class Nodo {
-	String usuario;//el usuario
-	//esto nos servira para la implementacion de la pila
-	//y la lsita enlazada
+	//este sera el contenido de nuestro nodo(su nombre)
+	String name;
+	//el nodo servira para la implementacion de la pila
+	//y la lista enlazada
 	Nodo siguiente;//el siguiente nodo
 	int id;
-	public Nodo(String user,int id ){
-		usuario = user;		
+	//constructor 1
+	public Nodo(String name_,int id ){
+		name = name_;		
 		this.id = id;
 	}
 	public String toString(){
-		return usuario;//qu retorne el usuario
+		return name;//qu retorna el nombre
 	}
+	//constructor 2
 	public Nodo(Nodo nodo){
-		this.usuario = nodo.usuario;
+		this.name = nodo.name;
 		this.id = nodo.id;
 	}
 }
