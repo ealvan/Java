@@ -6,9 +6,9 @@ public class InsertionSort {
 
 	public static void main(String[] args) {
 	//generaremos arrays de 1 hasta 100 elementos
-	for(int i = 1 ; i < 100; i++) {
+	
 		//Generando el array que es aleatorio
-		int[] list = generate(i);
+		int[] list = {1,3,4,5,2};
 		//ordenando por insertionSort la lista
 		//list = insertionSort(list);
 		//ahora lo mas importante, es hacer que sea 
@@ -16,36 +16,52 @@ public class InsertionSort {
 		//(el peor es cuando esta ordenado al reves)
 		//reverse(list);
 		//ahora podemos tener menos latencia
-		long start = System.nanoTime();
+		
 		list = insertionSort(list);
 		//obteniendo el tiempo
-		long time = System.nanoTime() - start;
-		//imprimir el tiempo
-		System.out.println(time);
-	}
+		 print_(list);
+	
 }
 //el metodo insertionSort lo que hace es ordenar una lista
 //intercambiando los elementos que no cumplan con el orden establecido
 public static int[] insertionSort(int[] list) {
 	
 	int index;
-	//recorremos desde el 1 hasta n-1(n el es #elementos)
-	for(int i = 1; i < list.length; i++) {
-		//obteniendo el indice presente
+
+	for(int i = list.length-1; i > 1 ; i--) {
+		
 		index = list[i];
-		//ahora vamos a ver si alguno no cumple con el orden
-		//todos los elementos desde 0 hasta i-1
-		for(int j = 0; j < i; j++) {
-			//si uno es mayor que el index
+		
+		for(int j = i; j > 0 ; j--) {
+			
 			if(index < list[j]) {
-				//lo intercambiamos en su lugar
+				
+				int aux = list[j];
+				list[j] = list[i];
+				list[i] = aux;
+			}
+		}
+	}
+	return list;
+}
+public static int[] insertionSort_(int[] list) {
+	
+	int index;
+
+	for(int i = list.length-1; i > 0 ; i--) {
+		
+		index = list[i];
+		
+		for(int j = i; j > 1 ; j--) {
+			
+			if(index < list[j]) {
+				
 				int aux = list[i];
 				list[i] = list[j];
 				list[j] = aux;
 			}
 		}
 	}
-	//retornamos la lista
 	return list;
 }
 //recibe una lista y la convierte en una lista al reves
