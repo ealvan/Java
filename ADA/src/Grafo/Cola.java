@@ -21,7 +21,7 @@ public class Cola {
 	//nodo esta en una lista enlazada, elimnara tambien los demas 
 	//que le suceden a el, es por eso que la cola solo almacena colas
 	public void encolar(Nodo nodo){
-		Nodo nuevo = new Nodo(nodo.name, nodo.id);
+		Nodo nuevo = new Nodo(nodo.usuario, nodo.id);
 		if(cabeza == null){
 			cabeza = nuevo;
 			ultimo = nuevo;
