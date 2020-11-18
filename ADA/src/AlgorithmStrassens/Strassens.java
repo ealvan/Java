@@ -80,7 +80,7 @@ public class Strassens {
 		
 		//primero vamos por la primera parte C11
 		for(int i = 0; i < n; i++) {
-			for(int j =0; j < n; j++) {
+			for(int j = 0; j < n; j++) {
 				result[i][j] = C11[i][j];
 			}
 		}
@@ -257,7 +257,7 @@ public class Strassens {
 		int n = A.length;
 		int[][] result = new int[n][n];
 		for(int i = 0; i < n;i++) {
-			for(int j =0; j < n; j++) {
+			for(int j = 0; j < n; j++) {
 				for(int k = 0; k < n;k++) {
 					result[i][j] += A[i][k]*B[k][j]; 
 				}
