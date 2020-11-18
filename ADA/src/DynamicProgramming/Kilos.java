@@ -14,10 +14,29 @@ public class Kilos {
 		}
 		return q;		
 	}
+	public static int count(int S[], int n, int f, int i){
+		if(n == f) {
+			return i;
+		}else if (n < f) {
+			i++;
+		}else {
+			return 1000;
+		}
+		int q = Integer.MAX_VALUE;
+		int aux = Integer.MAX_VALUE;
+
+		for(int j = 0; j < S.length; j++) {
+			q = S[j] + n;
+			q = Math.min(aux, count(S,q,f,i));
+			aux = q;
+		}
+		return q;
+	}
+
 	public static void main(String[] args) {		
-		int[] k = {1, 3, 4 };
-		int n = 10;
-		int m = contar(k,n);
+		int[] k = {1, 2,3,4,5,6,7,8,9};
+		int n = 2;
+		int m = count(k,0,n,0);
 		System.out.println(m);
 	}
 }
