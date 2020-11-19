@@ -20,22 +20,20 @@ public class Kilos {
 		}else if (n < f) {
 			i++;
 		}else {
-			return 1000;
+			return Integer.MAX_VALUE;
 		}
 		int q = Integer.MAX_VALUE;
-		int aux = Integer.MAX_VALUE;
+		
 
 		for(int j = 0; j < S.length; j++) {
-			q = S[j] + n;
-			q = Math.min(aux, count(S,q,f,i));
-			aux = q;
+			q = Math.min(q, count(S, S[j] + n, f, i) );
 		}
 		return q;
 	}
 
 	public static void main(String[] args) {		
-		int[] k = {1, 2,3,4,5,6,7,8,9};
-		int n = 2;
+		int[] k = {1 , 3 , 5 , 7};
+		int n = 18;
 		int m = count(k,0,n,0);
 		System.out.println(m);
 	}
