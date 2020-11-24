@@ -7,8 +7,22 @@ public class CountingInversions {
 	public static void main(String[] args) {
 
 		int[]A = {3,5};
-		int[]B = {2,4,1,3,5};
-		//  1 2 4 3
+		int[]B = {8, 4, 2, 1};
+		
+		//Ciudad[] ruta_off = {
+		//		new Ciudad("Lima",1),new Ciudad("Arequipa",2),
+		//		new Ciudad("Junin",3),new Ciudad("Puno",4),
+		//		new Ciudad("Cuzco",5),
+		//		};
+		//Ciudad[] ruta_new = {
+		//		new Ciudad("Arequipa",2),new Ciudad("Lima",1),
+		//		new Ciudad("Junin",3),new Ciudad("Puno",4),
+		//		new Ciudad("Cuzco",5),
+		//				};
+		
+		
+		//Turista t1 = new Turista("Carlos","Peru",ruta_new);
+		//  1 2 4 3 
 		//  1 2 3 4 
 		//int count = mergeCount(A,B);
 		//System.out.print(count);
