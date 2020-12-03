@@ -7,7 +7,7 @@ public class CountingInversions {
 	public static void main(String[] args) {
 
 		int[]A = {3,5};
-		int[]B = {8, 4, 2, 1};
+		int[]B = {1,20,6,4,5};
 		
 		//Ciudad[] ruta_off = {
 		//		new Ciudad("Lima",1),new Ciudad("Arequipa",2),
