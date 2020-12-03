@@ -10,10 +10,6 @@ public class Turista {
 		this.pais = pais;
 		this.ruta = ruta;
 	}
-	
-	
-	
-	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

@@ -106,8 +106,6 @@ public class CountingInversions {
 		}
 		return r;
 	}
-	
-	
 	public static int[][] mergeCount(int[]A, int[]B) {
 		int[] C = new int[A.length+B.length];
 		int pointer1 = 0;
