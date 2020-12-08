@@ -4,26 +4,26 @@ import java.util.Comparator;
 
 class Nodo implements Comparator<Nodo> { 
     public int id; 
-    public int cost;
+    public int d;
     Nodo siguiente;
     public Nodo() { } //empty constructor 
    
     public Nodo(Nodo m ) {
     	this.id = m.id;
-    	this.cost = m.cost;
+    	this.d = m.d;
     }
     public Nodo(int node, int cost) { 
         this.id = node; 
-        this.cost = cost; 
+        this.d = cost; 
     } 
     public String toString() {
     	return this.id+"";
     }
     public int compare(Nodo node1, Nodo node2) 
     { 
-        if (node1.cost < node2.cost) 
+        if (node1.d < node2.d) 
             return -1; 
-        if (node1.cost > node2.cost) 
+        if (node1.d > node2.d) 
             return 1; 
         return 0; 
     } 
