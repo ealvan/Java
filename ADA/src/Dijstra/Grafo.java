@@ -24,7 +24,17 @@ public class Grafo {
 		while(this.sizeVisited() != vertices) {
 			Nodo u = pqueue.remove();
 			visited[k] = u;
-			graphAdy(u.id);
+			//graphAdy(u.id);
+			int d = -1; 
+			Nodo isAdy = ady[u.id].cabeza.siguiente;
+			while(isAdy != null) {	
+				if(!Nodo.contains(visited,isAdy.id)) {
+					d = isAdy.cost; 
+                	relax(u.id, isAdy.id, d);
+                	pqueue.add(new Nodo(isAdy.id,dist[isAdy.id]));
+				}
+			isAdy = isAdy.siguiente;
+		}
 			k++;
 		}
 	}
@@ -69,16 +79,12 @@ public class Grafo {
 	}
 	public void graphAdy(int id) {
 		int d = -1; 
-	    int new_d = -1;
+	    //int new_d = -1;
 		Nodo isAdy = ady[id].cabeza.siguiente;
 		while(isAdy != null) {	
 			if(!Nodo.contains(visited,isAdy.id)) {
 				d = isAdy.cost; 
-                new_d = dist[id] + d;
-                //relax(u_id, v_id, d)
-                if(dist[isAdy.id] > new_d) {
-                	dist[isAdy.id] = new_d;
-                }
+                relax(id, isAdy.id, d);
                 pqueue.add(new Nodo(isAdy.id,dist[isAdy.id]));
 			}
 			isAdy = isAdy.siguiente;
@@ -112,9 +118,9 @@ public class Grafo {
 		gf.relacion(0, 1);
 		gf.relacion(1, 2);
 		gf.relacion(2, 3);
+		gf.relacion(0, 3);
 		
 		gf.dijstra(gf.ady, 0);
-		
 		gf.bfs(0);
 		System.out.println("****************************************");
 		for(int i = 0; i < gf.dist.length; i++) {
