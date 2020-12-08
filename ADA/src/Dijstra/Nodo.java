@@ -8,7 +8,10 @@ class Nodo implements Comparator<Nodo> {
     Nodo siguiente;
     public Nodo() { } //empty constructor 
    
-    
+    public Nodo(Nodo m ) {
+    	this.id = m.id;
+    	this.cost = m.cost;
+    }
     public Nodo(int node, int cost) { 
         this.id = node; 
         this.cost = cost; 

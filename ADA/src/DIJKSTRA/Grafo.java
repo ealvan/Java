@@ -120,7 +120,7 @@ public class Grafo {
 	//el level, nos dice hasta que nivel debemos llegar
 	//el actual, nos dice, en que llamada actual estamos 
 	private void Nlevel(int id, int level, int actual, boolean[] visitado){
-		//primero maracamos como visitado, el nodo inicial
+		//primero marcamos como visitado, el nodo inicial
 		visitado[id -1 ] = true;
 		//este es nuestro caso base
 		if(actual == level){
