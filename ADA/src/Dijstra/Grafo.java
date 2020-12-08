@@ -162,28 +162,34 @@ public class Grafo {
 		this.ady[id] = new Lista(m);//en la cabeza
 	}
 	//añadimos una relacion entre dos nodos
-	public void relacion(int id_s, int id_d) {
+	public void relacion(int id_s, int id_d, int w) {
 		//sacamos la referencia de la cabeza de la lsita enlazada
-		Nodo m = this.ady[id_d].cabeza;
+		//Nodo m = this.ady[id_d].cabeza;
 		//le hacemos una copia
-		Nodo n = new Nodo(m);
+		Nodo n = new Nodo(id_d,w);
 		//y luego se le insertar la copia
 		//para que no se guarden las misma referencias
 		this.ady[id_s].insertar(n);
 	}
 	//main
 	public static void main(String[] args) {
-		Grafo gf = new Grafo(4);
+		Grafo gf = new Grafo(5);
 		gf.insertarElement(0,0);
-		gf.insertarElement(1,3);
-		gf.insertarElement(2,2);
-		gf.insertarElement(3,1);
+		gf.insertarElement(1,0);
+		gf.insertarElement(2,0);
+		gf.insertarElement(3,0);
+		gf.insertarElement(4,0);
 		
-		gf.relacion(0, 1);
-		gf.relacion(1, 2);
-		gf.relacion(2, 3);
-		gf.relacion(0, 3);
-		
+		gf.relacion(0, 1, 5);
+		gf.relacion(0, 2, 10);
+		gf.relacion(1, 2, 3);
+		gf.relacion(1, 4, 2);
+		gf.relacion(1, 3, 9);
+		gf.relacion(2, 1, 2);
+		gf.relacion(2, 3, 1);
+		gf.relacion(3, 4, 4);
+		gf.relacion(4, 3, 6);
+		gf.relacion(4, 0, 7);
 		gf.dijstra_heap(0);
 		gf.bfs(0);
 		System.out.println("*****************");
