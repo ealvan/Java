@@ -10,11 +10,13 @@ public class CountingInversions2 {
 		int[] road3 = {0,1,2,3,4,5,6,7,8,9,10,11,13};
 		
 		int[] road4 = {0,6,7,1,4,10,11,13,2,3,5,8,9 };
-		int[][] roadList = new int[4][];
-		roadList[0]  = road1;
-		roadList[1]  = road2;
-		roadList[2]  = road3;
-		roadList[3]  = road4;
+		int[][] roadList = {
+				road1,
+				road2,
+				road3,
+				road4, 	
+		};
+	 
 		// Function to count the number of inversions 
 		
 	    // during the merge process 
