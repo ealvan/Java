@@ -1,8 +1,7 @@
 package Dijstra;
 
 public class Cola {
-
-	Nodo cabeza;//esta es la xaveza
+	Nodo cabeza;//esta es la cabeza
 	Nodo ultimo;
 	int longitud=0;
 	//constructor
@@ -17,7 +16,7 @@ public class Cola {
 	}
 	//encolar, nos encola una copia del nodo
 	//pues cuando guardamos una referencia,
-	//y despues la elimamos, entonces si ese
+	//y despues la elinamos, entonces si ese
 	//nodo esta en una lista enlazada, elimnara tambien los demas 
 	//que le suceden a el, es por eso que la cola solo almacena colas
 	public void encolar(Nodo nodo){

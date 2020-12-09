@@ -3,38 +3,49 @@ package Dijstra;
 import java.util.Comparator;
 
 class Nodo implements Comparator<Nodo> { 
-    public int id; 
-    public int d;
+	//aqui se guarda su indentificador
+    int id; 
+    //su peso, desde el id_src, hacia este nodo
+    int d;
+    //esto es para la lista enlazada
     Nodo siguiente;
-    public Nodo() { } //empty constructor 
-   
+    //constructor vacio
+    //lo necesitamos para inicializar la priorityQueue
+    public Nodo() { }   
+   //esto copia los datos de los nodos
     public Nodo(Nodo m ) {
     	this.id = m.id;
     	this.d = m.d;
     }
-    public Nodo(int node, int cost) { 
+    //esto es un constructor para crear nodos
+    public Nodo(int node, int d) { 
         this.id = node; 
-        this.d = cost; 
+        this.d = d; 
     } 
+    //esto es el toString
     public String toString() {
     	return this.id+"";
     }
-    public int compare(Nodo node1, Nodo node2) 
-    { 
-        if (node1.d < node2.d) 
+    //esto nos sirve para que el la cola de prioridad
+    //nos devuelva de acuerdo al peso minimo, el objeto
+    // caundo usemos priorityQueue,remove() devuelve el minimo
+    public int compare(Nodo nodo1, Nodo nodo2){ 
+        if (nodo1.d < nodo2.d) 
             return -1; 
-        if (node1.d > node2.d) 
+        if (nodo1.d > nodo2.d) 
             return 1; 
         return 0; 
     } 
-    public static boolean contains(Nodo visited[],int id) {
-		for(int i =0 ; i< visited.length; i++) {
-			if(visited[i] != null)
-			if(id == visited[i].id) {
+    //lo que hace es decirnos si el id, que se le paso esta en algun objeto
+    //de la lista visitados
+    //busqueda lineal
+    public static boolean contains(Nodo visitados[],int id) {
+		for(int i =0 ; i< visitados.length; i++) {
+			if(visitados[i] != null)
+			if(id == visitados[i].id) {
 				return true;
 			}
 		}
 		return false;
-	}
-    
+	}  
 }

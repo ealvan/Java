@@ -163,12 +163,11 @@ public class Grafo {
 	}
 	//añadimos una relacion entre dos nodos
 	public void relacion(int id_s, int id_d, int w) {
-		//sacamos la referencia de la cabeza de la lsita enlazada
-		//Nodo m = this.ady[id_d].cabeza;
-		//le hacemos una copia
+		//creamos un nuevo nodo, con el mismo id,
+		//pero puede ser diferente peso 
 		Nodo n = new Nodo(id_d,w);
-		//y luego se le insertar la copia
-		//para que no se guarden las misma referencias
+		//y luego se le inserta
+		//en la lista de adyacencia
 		this.ady[id_s].insertar(n);
 	}
 	//main
@@ -190,11 +189,36 @@ public class Grafo {
 		gf.relacion(3, 4, 4);
 		gf.relacion(4, 3, 6);
 		gf.relacion(4, 0, 7);
-		gf.dijstra_heap(0);
-		gf.bfs(0);
-		System.out.println("*****************");
-		for(int i = 0; i < gf.dist.length; i++) {
-			System.out.println(0 + "    " + i + "    "  + gf.dist[i]);
+		
+		int k  = 0;
+		int j = 0;
+		for(int i = 0; i < 1000; i++) {
+			long queueT = System.nanoTime();
+			gf.dijstra_queue(0);
+			queueT = System.nanoTime()- queueT;
+			
+			long heapT = System.nanoTime();
+			gf.dijstra_heap(0);
+			heapT = System.nanoTime()- heapT;
+			if(queueT > heapT) {
+				//significa que la mayor parte del tiempo
+				//el fibonnaci Heap es mas rapido
+				k++;
+			}else {
+				//queueT < heapT
+				//significa que la mayor parte del tiempo
+				//la cola de prioridad es mas rapida
+				j++;
+			}
+
 		}
+		if(j > k) {
+			System.out.println("La cola de prioridad es mas rapida que el Fibonacci Heap");
+		}else {
+			System.out.println(" El Fibonacci Heap  es mas rapido que la cola de prioridad");			
+		}
+		
+		System.out.println(k+ "***"+j);
+	
 	}
 }
