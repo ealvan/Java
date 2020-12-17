@@ -6,106 +6,105 @@ import java.util.*;
 import java.lang.*; 
 import java.io.*; 
 class MST { 
- // Number of vertices in the graph 
- private static final int V = 4; 
+ // nro de vertices
+ int V = 4; 
 
- // A utility function to find the vertex with minimum key 
- // value, from the set of vertices not yet included in MST 
- int minKey(int key[], Boolean mstSet[]) { 
+//nos retorna el indice del nodo, con el peso minimo
+ public int minIndice(int nodos[], Boolean visitado[]) { 
      // Initialize min value 
      int min = Integer.MAX_VALUE, min_index = -1; 
 
-     for (int v = 0; v < V; v++) 
-         if (mstSet[v] == false && key[v] < min) { 
-             min = key[v]; 
+     for (int v = 0; v < V; v++) {
+    	 // si el vertice "v" no esta visitado
+    	 // y el peso del nodo[v] es menor al peso inicial,
+    	 // que es infinito
+    	 //y asi sucesivaemnte hasta encontrar el indice del nodo
+    	 //con el menor peso
+    	 if (visitado[v] == false && nodos[v] < min) {  
+             min = nodos[v]; 
              min_index = v; 
-         } 
-
+         }
+     }
+          
+     //nos retorna el min_index
      return min_index; 
  } 
 
- // A utility function to print the constructed MST stored in 
- // parent[] 
- void printMST(int parent[], int graph[][]) { 
-     System.out.println("Edge \tWeight"); 
+ //nos devuelve el peso minimo del MST
+ public int pesoMin(int padres[], int grafo[][]) { 
+     int s = 0;
      for (int i = 1; i < V; i++) 
-         System.out.println(parent[i] + " - " + i + "\t" + graph[i][parent[i]]); 
+         s+=grafo[i][padres[i]];
+     return s;
  } 
 
- // Function to construct and print MST for a graph represented 
- // using adjacency matrix representation 
- void primMST(int graph[][]) { 
-     // Array to store constructed MST 
-     int parent[] = new int[V]; 
+ //este es el encargado de construir el minimum spanning tree(MST)
+ void MST(int grafo[][]) { 
+     // este guardara los nodos padre del indice respectivo
+	 // si el indice es v, entonces padres[v] = u
+	 //entonces el padre de v, es u
+     int padres[] = new int[V]; 
+ 
+     int nodos[] = new int[V]; 
 
-     // Key values used to pick minimum weight edge in cut 
-     int key[] = new int[V]; 
+     // representa a los nodos ya visitados de acuerdo al indice
+     Boolean visitado[] = new Boolean[V]; 
 
-     // To represent set of vertices included in MST 
-     Boolean mstSet[] = new Boolean[V]; 
-
-     // Initialize all keys as INFINITE 
+     // incializa todos los nodos en pesos de Infinito
+     // y marcarlos en false todos
      for (int i = 0; i < V; i++) { 
-         key[i] = Integer.MAX_VALUE; 
-         mstSet[i] = false; 
+         nodos[i] = Integer.MAX_VALUE; 
+         visitado[i] = false; 
      } 
 
-     // Always include first 1st vertex in MST. 
-     key[0] = 0; // Make key 0 so that this vertex is 
-     // picked as first vertex 
-     parent[0] = -1; // First node is always root of MST 
+     //este sera el vertice "0" con el que se inicia el MST 
+     nodos[0] = 0;
+     // ahora recorremos todos los vertices
+     for (int k = 0; k < V - 1; k++) { 
+         //primero agarramos los el vertice con el minimo peso hacia el vertice 
+    	 // de inicio
+         int u = minIndice(nodos, visitado); 
 
-     // The MST will have V vertices 
-     for (int count = 0; count < V - 1; count++) { 
-         // Pick thd minimum key vertex from the set of vertices 
-         // not yet included in MST 
-         int u = minKey(key, mstSet); 
+         //lo ponemos como visitado
+         visitado[u] = true; 
 
-         // Add the picked vertex to the MST Set 
-         mstSet[u] = true; 
-
-         // Update key value and parent index of the adjacent 
-         // vertices of the picked vertex. Consider only those 
-         // vertices which are not yet included in MST 
+         //ahora recorremos los indices adyacentes al indice "u"
          for (int v = 0; v < V; v++) 
-
-             // graph[u][v] is non zero only for adjacent vertices of m 
-             // mstSet[v] is false for vertices not yet included in MST 
-             // Update the key only if graph[u][v] is smaller than key[v] 
-             if (graph[u][v] != 0 && mstSet[v] == false && graph[u][v] < key[v]) { 
-                 parent[v] = u; 
-                 key[v] = graph[u][v]; 
+             //  Ahora los evaluamos
+        	 // si es cero la arista, significa que es cero, osea no cuenta
+        	 // si el vertice adyacente "v" es falso, signifia que aun no se ha visitado
+        	 // luego si cumple todas estas condiciones, vemos esas aristas adyacentes
+        	 // que cumplen las condiciones anteriores, entonces ...
+             if (grafo[u][v] != 0 && visitado[v] == false && grafo[u][v] < nodos[v]) {
+            	 // hacemos que el padre de v, sea u
+                 padres[v] = u; 
+                 //luego asignamos, a la que hasta ahora es la arista minima
+                 nodos[v] = grafo[u][v]; 
              } 
      } 
-
-     // print the constructed MST 
-     printMST(parent, graph); 
+     // luego retornamos el peso minimo
+       
+     int p = pesoMin(padres, grafo);
+     System.out.println(p);
+    
  } 
 
  public static void main(String[] args) 
  { 
-     /* Let us create the following graph 
-     2 3 
-     (0)--(1)--(2) 
-     | / \ | 
-     6| 8/ \5 |7 
-     | /     \ | 
-     (3)-------(4) 
-         9         */
      MST t = new MST(); 
-     int graph[][] = new int[][] { { 0 ,6 , 5, 0 }, 
+     int grafo[][] = new int[][] { { 0 ,6 , 5, 0 }, 
                                    { 6 ,0, 1,2 }, 
                                    { 5 ,1 ,0 ,10 }, 
                                    { 0 ,2 ,10 ,0 }, 
                                    }; 
-
+      // las relaciones entre ciudades
      /*		  LISBON LONDON PARIS BERLIN  
       LISBON   0        6      5     0                        
       LONDON   6        0      1     2            
       PARIS    5        1      0     10           
       BERLIN   0        2     10     0               
       */                              
-     // Print the solution 
-     t.primMST(graph); 
+     //retornamos el peso minimo
+     t.MST(grafo); 
  } 
 } 
