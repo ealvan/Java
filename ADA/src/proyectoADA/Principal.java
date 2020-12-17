@@ -6,21 +6,20 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
 	String[] places = {
-			"Plaza de Armas",
-			"Monasterio de Santa Catalina de Siena",
-			"Catedral de Arequipa y su museo",
-			"El valle y el cañón del Colca",
-			"Convento de Santa Teresa",
-			"Canotaje en el Rio Chili",
-			"Iglesia y Claustros de la Compañía",
-			"Los Petroglifos de Toro Muerto",
-			"Reserva Nacional de Salinas y Aguada Blanca",
-			"Sillar de Arequipa",
-			"Casa Goyeneche y Casa del Moral",
-			"Barrio de San Lázaro – Picanterías",
-			"Complejo Arqueológico de Uyo Uyo",
-			"Casa Museo Mario Vargas Llosa",
-			"Mercado de San Camilo"
+			"Place0",
+			"Place1" ,
+			"Place2",
+			"Place3",
+			"Place4",
+			"Place5",
+			"Place6",
+			"Place7",
+			"Place8",
+			"Place9",
+			"Place10",
+			"Place11",
+			"Place12",
+			"Place13",
 	};
     public Principal() {
         initComponents();
@@ -100,12 +99,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel5.setText("Ruta Final");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Volcan", "Catedral1", "Comida" };
-            CountingInversions2 m = new CountingInversions2();
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+       
         
         jScrollPane2.setViewportView(jList1);
 
@@ -218,8 +212,7 @@ public class Principal extends javax.swing.JFrame {
         for(javax.swing.JCheckBox key: list) {
         	if(key.isSelected() == true) {
         		Ciudad any =  new Ciudad(key.getText(),i);
-        		lugares.add(any);
-        		
+        		lugares.add(any);	
         	}
         	i++;
         }
@@ -231,20 +224,30 @@ public class Principal extends javax.swing.JFrame {
          * */
         String str = "";
         CountingInversions2 m = new CountingInversions2();
+        System.out.print(lugares);
         String[] recomendaciones = m.recomendar(lugares);
         for(String l : recomendaciones) {
-        	str += l;
+        	str += " "+l;
         }
         MostrarRuta.setText(str);
+        
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        	public int getSize() { return recomendaciones.length; }
+            public String getElementAt(int i) { return recomendaciones[i]; }
+            CountingInversions2 m = new CountingInversions2();
+            String[] recomendaciones = m.recomendar(lugares);
+             
+        	
+        });
         
     }                                        
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        
     }                                        
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {                                            
-        // TODO add your handling code here:
+         
     }                                           
 
     /**
