@@ -78,6 +78,19 @@ public class Principal extends javax.swing.JFrame {
         jCheckBox6.setText("Comida");
 
         jCheckBox7.setText("Catedral");
+        ArrayList<javax.swing.JCheckBox> list = new ArrayList<javax.swing.JCheckBox>(Arrays.asList(
+        		jCheckBox1,
+        		jCheckBox2,
+        		jCheckBox3,
+        		jCheckBox4,
+        		jCheckBox5,
+        		jCheckBox6,
+        		jCheckBox7 ));
+        int  m =0;
+        for(javax.swing.JCheckBox k:list) {
+        	k.setText(places[m]);
+        	m++;
+        }
 
         jButton1.setText("Aceptar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -108,8 +121,8 @@ public class Principal extends javax.swing.JFrame {
         MostrarRuta.setBackground(new java.awt.Color(153, 153, 255));
 
         coinci.setEditable(false);
-        coinci.setColumns(20);
-        coinci.setRows(5);
+        coinci.setColumns(10);
+        coinci.setRows(15);
         jScrollPane1.setViewportView(coinci);
 
         recom.setEditable(false);
@@ -243,10 +256,11 @@ public class Principal extends javax.swing.JFrame {
         System.out.print(lugares);
         String[] recomendaciones = m.recomendar(lugares);
         for(String l : recomendaciones) {
-        	str += " "+l;
+        	//str += " "+l;
         	recom.append(String.valueOf(l+"\n"));
+        	coinci.append(l+"\n");
         }
-        MostrarRuta.setText(str);
+       // MostrarRuta.setText(str);
         
         // aqui hay que cambiar jlist1 a coinci(text area)
        /* jList1.setModel(new javax.swing.AbstractListModel<String>() {
@@ -268,6 +282,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void ingreRecActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
+    	jButton2ActionPerformed(evt);
     }                                                                                  
 
     /**

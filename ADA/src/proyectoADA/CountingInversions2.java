@@ -201,8 +201,10 @@ public class CountingInversions2 {
 	    		lugaresI[i] = lugares.get(i);
 	    	}
 	    	ArrayList<Integer> idsRecomendados = main_second(lugaresI);
+	    	
 	    	return retornarLugares(idsRecomendados);
 	    }
+	    //public static String[] lugaresRecomenda
 	    public static void main(String[] args) { 
 	    	
 	    	Ciudad[] lugares = new Ciudad[6];
