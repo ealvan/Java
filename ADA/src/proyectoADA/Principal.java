@@ -7,20 +7,20 @@ public class Principal extends javax.swing.JFrame {
      * Creates new form Principal
      */
     String[] places = {
-			"Place0",
-			"Place1" ,
-			"Place2",
-			"Place3",
-			"Place4",
-			"Place5",
-			"Place6",
-			"Place7",
-			"Place8",
-			"Place9",
-			"Place10",
-			"Place11",
-			"Place12",
-			"Place13",
+			"Plaza de Armas",
+			"Monasterio de Santa Catalina de Siena",
+			"Catedral de Arequipa y su museo",
+			"El valle y el cañón del Colca",
+			"Convento de Santa Teresa",
+			"Canotaje en el Rio Chili",
+			"Iglesia y Claustros de la Compañía",
+			"Los Petroglifos de Toro Muerto",
+			"Reserva Nacional de Salinas y Aguada Blanca",
+			"Sillar de Arequipa",
+			"Casa Goyeneche y Casa del Moral",
+			"Barrio de San Lázaro – Picanterías",
+			"Complejo Arqueológico de Uyo Uyo",
+			"Casa Museo Mario Vargas Llosa",
 	};
     public Principal() {
         initComponents();
@@ -61,7 +61,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel1.setText("Destinos");
 
-        jLabel2.setText("Coincidencias");
+        jLabel2.setText("Ruta final");
 
         jLabel3.setText("Selecciona 5 destinos");
 
@@ -224,7 +224,9 @@ public class Principal extends javax.swing.JFrame {
         int i = 0;
         for(javax.swing.JCheckBox key: list) {
         	if(key.isSelected() == true) {
+        		
         		Ciudad any =  new Ciudad(key.getText(),i);
+        		coinci.append(String.valueOf(key.getText()+"\n"));
         		lugares.add(any);	
         	}
         	i++;
@@ -235,14 +237,17 @@ public class Principal extends javax.swing.JFrame {
         	 str+=key+" "+key.id+"\n";
         }
          * */
+        
         String str = "";
         CountingInversions2 m = new CountingInversions2();
         System.out.print(lugares);
         String[] recomendaciones = m.recomendar(lugares);
         for(String l : recomendaciones) {
         	str += " "+l;
+        	recom.append(String.valueOf(l+"\n"));
         }
         MostrarRuta.setText(str);
+        
         // aqui hay que cambiar jlist1 a coinci(text area)
        /* jList1.setModel(new javax.swing.AbstractListModel<String>() {
         	public int getSize() { return recomendaciones.length; }
@@ -250,7 +255,7 @@ public class Principal extends javax.swing.JFrame {
             CountingInversions2 m = new CountingInversions2();
             String[] recomendaciones = m.recomendar(lugares);
              
-        	
+      	
         });*/
     }                                        
 

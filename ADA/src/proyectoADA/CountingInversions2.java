@@ -4,23 +4,6 @@ import java.util.Arrays;
 public class CountingInversions2 {
 	  
 		String[] turisticos = {
-				"Place0",
-				"Place1" ,
-				"Place2",
-				"Place3",
-				"Place4",
-				"Place5",
-				"Place6",
-				"Place7",
-				"Place8",
-				"Place9",
-				"Place10",
-				"Place11",
-				"Place12",
-				"Place13",
-		};
-		/*
-		 * {
 				"Plaza de Armas",
 				"Monasterio de Santa Catalina de Siena",
 				"Catedral de Arequipa y su museo",
@@ -35,6 +18,23 @@ public class CountingInversions2 {
 				"Barrio de San Lázaro – Picanterías",
 				"Complejo Arqueológico de Uyo Uyo",
 				"Casa Museo Mario Vargas Llosa",
+		};
+		/*
+		 * {
+				"Place0",
+				"Place1" ,
+				"Place2",
+				"Place3",
+				"Place4",
+				"Place5",
+				"Place6",
+				"Place7",
+				"Place8",
+				"Place9",
+				"Place10",
+				"Place11",
+				"Place12",
+				"Place13",
 		};
 		 * */
 		
@@ -68,11 +68,12 @@ public class CountingInversions2 {
 	    	for(int i = 0; i < items.length; i++) {
 	    		items[i] = lugares[i].id;
 	    	}
-	    	int[] keys = new int[14-lugares.length];
+	    	 
 	    	
-	    	int[] inversions = new int[keys.length];
+	    	int[] inversions = new int[roadList.length];
 	    	
 	    	for(int i = 0; i < roadList.length; i++) {
+	    		int keys[];
 	    		keys = cortarGen(roadList[i],items);
 	    		inversions[i] = mergeSortAndCount(keys,0,keys.length);
 	    	}
