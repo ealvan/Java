@@ -240,7 +240,7 @@ public class Principal extends javax.swing.JFrame {
         	if(key.isSelected() == true) {
         		
         		Ciudad any =  new Ciudad(key.getText(),i);
-        		coinci.append(String.valueOf(key.getText()+"\n"));
+        		//coinci.append(String.valueOf(key.getText()+"\n"));
         		lugares.add(any);	
         	}
         	i++;
@@ -266,18 +266,17 @@ public class Principal extends javax.swing.JFrame {
         	mas+=ma.nombre+"\n";
         }
         coinci.setText(mas);
-        
+        mas="";
+        str="";
+        lugares.clear();
        
        // MostrarRuta.setText(str);
-        
         // aqui hay que cambiar jlist1 a coinci(text area)
        /* jList1.setModel(new javax.swing.AbstractListModel<String>() {
         	public int getSize() { return recomendaciones.length; }
             public String getElementAt(int i) { return recomendaciones[i]; }
             CountingInversions2 m = new CountingInversions2();
             String[] recomendaciones = m.recomendar(lugares);
-             
-      	
         });*/
     }                                        
     String buf = "";

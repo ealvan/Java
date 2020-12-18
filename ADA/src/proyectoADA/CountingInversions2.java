@@ -39,13 +39,11 @@ public class CountingInversions2 {
 		 * */
 		
 		
-		int[] road1 = {0,1,2,3,4,5,6,7,8,9,10,11,13};
-		
-		int[] road2 = {0,6,7,1,4,10,11,13,2,3,5,8,9 };
-		int[] road3 = {0,1,2,3,4,5,6,7,8,9,10,11,13};
-		
-		int[] road4 = {0,6,7,1,4,10,11,13,2,3,5,8,9 };
-		int[] road5 = {10,11,7,1,4,3,8,0,13,2,6,9,5, };
+		int[] road1 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13};
+		int[] road2 = {0,1,10,5,6,13,11,7,8,12,2,3,9,4};
+		int[] road3 = {0,1,9,10,5,6,7,8,12,3,4,13,11,2};
+		int[] road4 = {0,4,1,9,5,6,12,3,10,7,8,11,2,13 };
+		int[] road5 = {0,4,10,7,8,2,11,13,3,1,9,5,6,12 };
 		
 		int[][] roadList = {
 				road1,
@@ -80,7 +78,7 @@ public class CountingInversions2 {
 	    	int items1[] = copy(items);
 	    	int isUserInversions = mergeSortAndCount(items,0,items.length);
 	    	int idNear = id_list_menor(inversions,isUserInversions);
-	    	System.out.println(idNear);
+	    	System.out.println("Id:"+idNear);
 	    	int[] nearRoad = roadList[idNear];
 	    	
 	    	ArrayList<Integer> nearR = toArrayList(nearRoad);
@@ -210,16 +208,16 @@ public class CountingInversions2 {
 	    	Ciudad[] lugares = new Ciudad[6];
 	    	lugares[0] = new Ciudad("Place0",0); 
 	    	lugares[1] = new Ciudad("Place1",7);
-	    	lugares[2] = new Ciudad("Place2",1);
-	    	lugares[3] = new Ciudad("Place3",10);
-	    	lugares[4] = new Ciudad("Place4",11);
-	    	lugares[5] = new Ciudad("Place5",8);
+	    	lugares[2] = new Ciudad("Place2",8);
+	    	lugares[3] = new Ciudad("Place3",4);
+	    	lugares[4] = new Ciudad("Place4",13);
+	    	lugares[5] = new Ciudad("Place5",2);
 	    	/*
-	    0 {0,1,2,3,4,5,6,7,8,9,10,11,13};
-		1 {0,6,7,1,4,10,11,13,2,3,5,8,9 };
-		2 {0,1,2,3,4,5,6,7,8,9,10,11,13};
-		3 {0,6,7,1,4,10,11,13,2,3,5,8,9 };
-		4 {10,11,7,1,4,3,8,0,13,2,6,9,5, }; 
+	    road0 = {0,1,2,3,4,5,6,7,8,9,10,11,12,13};
+		road1 = {0,1,10,5,6,13,11,7,8,12,2,3,9,4};
+		road2 = {0,1,9,10,5,6,7,8,12,3,4,13,11,2};
+		road3 = {0,4,1,9,5,6,12,3,10,7,8,11,2,13};
+		road4 = {0,4,10,7,8,2,11,13,3,1,9,5,6,12};
 	    	*/
 	    	
 	    	CountingInversions2 m = new CountingInversions2();
@@ -227,7 +225,7 @@ public class CountingInversions2 {
 	    	ArrayList<Integer> main = m.main_second(lugares);
 	    	String[] place = m.retornarLugares(main);
 	    	
-	    	System.out.println(Arrays.toString(place));
+	    	//System.out.println(Arrays.toString(place));
 	    	for(Integer i : main) {
 	    		System.out.println(i);
 	    	}
