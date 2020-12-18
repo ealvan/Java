@@ -6,6 +6,7 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
+    boolean switch1 = true;
     String[] places = {
 			"Plaza de Armas",
 			"Monasterio de Santa Catalina de Siena",
@@ -256,10 +257,17 @@ public class Principal extends javax.swing.JFrame {
         System.out.print(lugares);
         String[] recomendaciones = m.recomendar(lugares);
         for(String l : recomendaciones) {
-        	//str += " "+l;
-        	recom.append(String.valueOf(l+"\n"));
-        	coinci.append(l+"\n");
+        	str += l+"\n";
         }
+        recom.setText(str);
+        coinci.setText(str);
+        String mas = str;
+        for(Ciudad ma : lugares) {
+        	mas+=ma.nombre+"\n";
+        }
+        coinci.setText(mas);
+        
+       
        // MostrarRuta.setText(str);
         
         // aqui hay que cambiar jlist1 a coinci(text area)
@@ -272,17 +280,19 @@ public class Principal extends javax.swing.JFrame {
       	
         });*/
     }                                        
-
+    String buf = "";
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	String lug=(ingreRec.getText());
-    	
-    	MostrarRuta.setText(lug);
+    	buf += lug+" / ";
+    	MostrarRuta.setText(buf);
+    	ingreRec.setText("");
     }                                        
 
     private void ingreRecActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
     	jButton2ActionPerformed(evt);
+    	
     }                                                                                  
 
     /**
